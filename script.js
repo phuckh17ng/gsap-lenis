@@ -14,17 +14,26 @@ function raf(time) {
 }
 requestAnimationFrame(raf);
 
-// const box = document.getElementsByClassName("visual-mask-1");
-// console.log(box);
-
-// for (let i = 0; i < box.length; i++) {
-// 	console.log(box[i].getBoundingClientRect());
-// }
+window.addEventListener("mousemove", (e) => {
+	gsap.to("#cursor", {
+		ease: "easeInOut",
+		duration: 0.5,
+		x: e.clientX - 15,
+		y: e.clientY - 15,
+	});
+});
 
 const timeline = gsap.timeline({
 	defaults: { width: 300, duration: 3, ease: "none" },
 });
 
+const box = document.getElementsByClassName("visual-mask-1");
+let width = [];
+for (let i = 0; i < box.length; i++) {
+	width = [...width, box[i].getBoundingClientRect().width];
+}
+
+console.log(width);
 timeline
 	.to("#mask-3d", {
 		scrollTrigger: {
@@ -33,7 +42,7 @@ timeline
 			scrub: true,
 			end: "bottom center",
 		},
-		width: 300,
+		width: width[0],
 		duration: 3,
 		ease: "none",
 	})
@@ -45,7 +54,7 @@ timeline
 			scrub: true,
 			end: "bottom center",
 		},
-		width: 600,
+		width: width[1],
 		duration: 3,
 		ease: "none",
 	})
@@ -56,7 +65,7 @@ timeline
 			scrub: true,
 			end: "bottom center",
 		},
-		width: 600,
+		width: width[2],
 		duration: 3,
 		ease: "none",
 	})
@@ -67,7 +76,7 @@ timeline
 			scrub: true,
 			end: "bottom center",
 		},
-		width: 600,
+		width: width[3],
 		duration: 3,
 		ease: "none",
 	})
@@ -78,7 +87,7 @@ timeline
 			scrub: true,
 			end: "bottom center",
 		},
-		width: 600,
+		width: width[4],
 		duration: 3,
 		ease: "none",
 	});
